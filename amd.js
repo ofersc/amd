@@ -1,5 +1,4 @@
-window.lpTag = window.lpTag || {};
-window.lpTag.amd = (function() {
+var amd = (function() {
 
     // initialization
 
