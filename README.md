@@ -1,5 +1,5 @@
 # AMD
-This module implements an aynchronous module definition system
+This module implements an aynchronous module definition API
 
 ## Examples
 
