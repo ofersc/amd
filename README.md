@@ -8,11 +8,11 @@ This module implements an aynchronous module definition system
 ```javascript
   amd.define('MyCalculator', [], function() {
     
-      function MyCaluculator() {
+      function MyCalculator() {
         this._value = 0;
       }
       
-      MyCalculator.prototoype.sum = function(a,b) {
+      MyCalculator.prototype.sum = function(a,b) {
         if (typeof b === 'undefined') {
           this._value += a;
         } else {
@@ -20,7 +20,7 @@ This module implements an aynchronous module definition system
         }
       };
       
-      MyCalculator.prototoype.getValue = function() {
+      MyCalculator.prototype.getValue = function() {
         return this._value;
       };
       
