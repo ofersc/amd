@@ -1,4 +1,4 @@
-var amd = (function() {
+window.amd = (function() {
 
     // initialization
 
