@@ -28,6 +28,7 @@ window.amd = (function() {
     var moduleLookupInterval = 5;
     var head = document.getElementsByTagName('head')[0];
     var loadingModules = {};
+    var definePath;
     var registeredModules = {};
 
     _loadMain();
@@ -100,14 +101,16 @@ window.amd = (function() {
 
             loadingModules[path] = true;
 
+            definePath = path;
+
             if (type === Type.JS && config.debug) {
-                _addScriptTag(_getRoot() + path);
+                _addScriptTag(path);
             } else {
-                xhr.open('GET', _getRoot() + getPath);
+                xhr.open('GET', getPath);
                 xhr.onreadystatechange = function() {
                     if (xhr.readyState === 4) {
                         if (type === Type.JS) {
-                            registeredModules[path] = new Function(xhr.responseText).call(null);
+                            new Function(xhr.responseText).call(null);
                         } else {
                             registeredModules[path] = xhr.responseText;
                         }
@@ -174,10 +177,17 @@ window.amd = (function() {
 
     function define(name, deps, func) {
 
-        if (typeof deps === 'function') {
+        if (typeof name === 'function') {
+            func = name;
+            deps = [];
+            name = definePath;
+        }
+        else if (typeof deps === 'function') {
             func = deps;
             deps = [];
         }
+
+        definePath = null;
 
         loadingModules[name] = true;
         require(deps, function() {
